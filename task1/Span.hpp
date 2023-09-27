@@ -2,6 +2,7 @@
 #include <concepts>
 #include <cstdlib>
 #include <iterator>
+#include <cassert>
 #include <vector>
 
 template<typename T, size_t extent>
@@ -88,11 +89,11 @@ public:
     }
 
     reverse_iterator rbegin() const {
-        return std::reverse_iterator(end());
+        return std::make_reverse_iterator(end());
     }
 
     reverse_iterator rend() const {
-        return std::reverse_iterator(begin());
+        return std::make_reverse_iterator(begin());
     }
 
     reference Front() const {
@@ -112,20 +113,24 @@ public:
     };
 
     Span<element_type> Last(int length) const {
+        assert(length <= this->Size());
         return Span<element_type>(this->end() - length, this->end());
     }
 
     template<int length>
     constexpr Span<element_type, length> Last() const {
+        assert(length <= this->Size());
         return Span<element_type, length>(this->Data() + this->Size() - length);
     }
 
     Span<element_type> First(int length) const {
+        assert(length <= this->Size());
         return Span<element_type>(this->Data(), this->Data() + length);
     }
 
     template<int length>
     constexpr Span<element_type, length> First() const {
+        assert(length <= this->Size());
         return Span<element_type, length>(this->Data());
     }
 };
