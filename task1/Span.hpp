@@ -113,24 +113,20 @@ public:
     };
 
     Span<element_type> Last(int length) const {
-        assert(length <= this->Size());
         return Span<element_type>(this->end() - length, this->end());
     }
 
     template<int length>
     constexpr Span<element_type, length> Last() const {
-        assert(length <= this->Size());
         return Span<element_type, length>(this->Data() + this->Size() - length);
     }
 
     Span<element_type> First(int length) const {
-        assert(length <= this->Size());
         return Span<element_type>(this->Data(), this->Data() + length);
     }
 
     template<int length>
     constexpr Span<element_type, length> First() const {
-        assert(length <= this->Size());
         return Span<element_type, length>(this->Data());
     }
 };
