@@ -94,7 +94,7 @@ public:
   }
 
   difference_type operator-(const SkipIterator &that) const {
-    return pointer_ - that.pointer_;
+    return (pointer_ - that.pointer_) / stride_;
   }
 
   SkipIterator &operator+=(const difference_type n) {
