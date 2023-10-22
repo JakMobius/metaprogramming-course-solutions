@@ -143,7 +143,7 @@ struct Replicate<N, T> : Nil {};
 
 // MARK: Map
 
-template <template <typename Arg> typename F, class TL>
+template <template <typename ...Arg> typename F, class TL>
   requires TypeList<TL>
 struct Map {
   using Head = F<typename TL::Head>;
