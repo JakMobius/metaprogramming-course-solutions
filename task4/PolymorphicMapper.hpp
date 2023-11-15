@@ -18,7 +18,7 @@ template <class Base, class Target, class Head, class... Tail>
 struct PolymorphicMapper<Base, Target, Head, Tail...> {
   static std::optional<Target> map(const Base &object) {
     if (dynamic_cast<const typename Head::MappingFrom *>(&object)) {
-      return Target(Head::mappingTarget);
+      return Head::mappingTarget;
     }
 
     return PolymorphicMapper<Base, Target, Tail...>::map(object);
