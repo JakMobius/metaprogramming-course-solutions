@@ -17,6 +17,8 @@ template <class Base, class Target> struct PolymorphicMapper<Base, Target> {
 template <class Base, class Target, class Head, class... Tail>
 struct PolymorphicMapper<Base, Target, Head, Tail...> {
   static std::optional<Target> map(const Base &object) {
+    static_assert(std::is_same_v<const decltype(Head::mappingTarget), const Target>);
+
     if (dynamic_cast<const typename Head::MappingFrom *>(&object)) {
       return Head::mappingTarget;
     }
