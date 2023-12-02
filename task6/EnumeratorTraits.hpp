@@ -5,6 +5,7 @@
 #include <regex>
 #include <string>
 #include <type_traits>
+#include <array>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
