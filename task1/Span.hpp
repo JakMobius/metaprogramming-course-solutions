@@ -13,10 +13,6 @@ public:
   StaticSpan(element_type *begin) { this->data_ = begin; }
 
   template <typename Container>
-    requires std::is_array_v<Container> ||
-             std::is_same_v<Container,
-                            std::array<typename Container::value_type,
-                                       std::size(Container())>>
   StaticSpan(Container &container) {
     this->data_ = container.data();
   }
@@ -125,7 +121,7 @@ template <typename Container>
 Span(Container &) -> Span<typename Container::value_type, Container().size()>;
 
 template <typename Container>
-Span(Container &) -> Span<typename Container::value_type>;
+Span(Container &) -> Span<typename Container::value_type, std::dynamic_extent>;
 
 template <typename Iter> Span(Iter, Iter) -> Span<typename Iter::value_type>;
 
