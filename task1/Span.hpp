@@ -122,7 +122,7 @@ public:
     }
 
     Span<element_type> First(int length) const {
-        return Span<element_type>(this->Data(), this->Data() + length);
+        return Span<element_type, std::dynamic_extent>(this->Data(), this->Data() + length);
     }
 
     template<int length>
